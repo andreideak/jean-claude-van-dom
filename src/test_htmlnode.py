@@ -17,9 +17,13 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_props_to_html(self):
         node = HTMLNode(tag="a",value="Boot.Dev",props={"href": "https://boot.dev", "target": "_blank"})
-        expected = f" href=\"{node.props["href"]}\" target=\"{node.props["target"]}\""
-        received = node.props_to_html()
-        self.assertEqual(expected,received)
+        if node.props:
+            expected = f" href=\"{node.props["href"]}\" target=\"{node.props["target"]}\""
+            received = node.props_to_html()
+            self.assertEqual(expected,received)
+        else:
+            raise ValueError("there are no props")
+
 
 if __name__ == "__main__":
     unittest.main()
